@@ -1,6 +1,6 @@
 {
   "name": "react-d3-bar-graph",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A simple and responsive react d3 bar graph",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -50,5 +50,6 @@
     "type": "git",
     "url": "https://github.com/HelixHEX/react-d3-bar-graph"
   },
-  "homepage": "https://github.com/HelixHEX/react-d3-bar-graph#readme"
+  "homepage": "https://github.com/HelixHEX/react-d3-bar-graph#readme",
+  "dependencies": {}
 }

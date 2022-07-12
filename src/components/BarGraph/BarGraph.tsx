@@ -70,7 +70,7 @@ export const BarGraph = ({
   const wrapperRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const dimensions = useResizeObserver({ ref: wrapperRef });
   useEffect(() => {
-    const margin = { top: 30, right: 30, bottom: 60, left: 50 };
+    const margin = { top: 30, right: 30, bottom: 5, left: 50 };
     const svg = select(svgRef.current).style("overflow", "visble");
 
     if (!dimensions) return;
@@ -92,7 +92,7 @@ export const BarGraph = ({
       .each(function (d) {
         maxHeight = Math.max(
           maxHeight,
-          this.getBBox().width + xAxis.tickSize() + xAxis.tickPadding()
+          this.getBBox().height + xAxis.tickSize() + xAxis.tickPadding() + margin.bottom
         );
       })
       .remove();
