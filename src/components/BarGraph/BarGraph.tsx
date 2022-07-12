@@ -15,8 +15,9 @@ type Props = {
   yAxisStyles?: any;
   axisStyles?: any;
   title?: string;
-  xAxisSlanted?: boolean
-  titleStyles?: any
+  xAxisSlanted?: boolean;
+  titleStyles?: any;
+  colors?: any;
 };
 
 type ObserverProps = {
@@ -60,9 +61,10 @@ export const BarGraph = ({
   xAxisStyles,
   yAxisStyles,
   axisStyles,
-  title="",
+  title = "",
   xAxisSlanted = false,
-  titleStyles
+  titleStyles,
+  colors = ["black"],
 }: Props) => {
   const svgRef = useRef() as React.MutableRefObject<SVGSVGElement>;
   const wrapperRef = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -101,21 +103,21 @@ export const BarGraph = ({
 
     if (xAxisSlanted) {
       svg
-      .select<SVGSVGElement>(".x-axis")
-      .style("transform", `translate(0,${dimensions.height - maxHeight}px)`)
-      .call(applyStyles(xAxisStyles ? xAxisStyles : axisStyles))
-      .call(xAxis)
-      .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", ".15em")
-      .attr("transform", "rotate(-65)");
+        .select<SVGSVGElement>(".x-axis")
+        .style("transform", `translate(0,${dimensions.height - maxHeight}px)`)
+        .call(applyStyles(xAxisStyles ? xAxisStyles : axisStyles))
+        .call(xAxis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
     } else {
       svg
-      .select<SVGSVGElement>(".x-axis")
-      .style("transform", `translate(0,${dimensions.height - maxHeight}px)`)
-      .call(applyStyles(xAxisStyles ? xAxisStyles : axisStyles))
-      .call(xAxis)
+        .select<SVGSVGElement>(".x-axis")
+        .style("transform", `translate(0,${dimensions.height - maxHeight}px)`)
+        .call(applyStyles(xAxisStyles ? xAxisStyles : axisStyles))
+        .call(xAxis);
     }
 
     const yAxis = axisLeft(yScale).ticks(ticks);
@@ -139,7 +141,8 @@ export const BarGraph = ({
       .attr(
         "height",
         (value) => dimensions.height - maxHeight - yScale(value[yValue])
-      );
+      )
+      .attr("fill", (_, i) => colors[i]);
   }, [
     yRange,
     xValue,
@@ -156,7 +159,13 @@ export const BarGraph = ({
   return (
     <>
       <div style={{ width, height }} ref={wrapperRef}>
-        <h1 style={{ textAlign: "center", fontFamily: "sans-serif", ...titleStyles }}>
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "sans-serif",
+            ...titleStyles,
+          }}
+        >
           {title}
         </h1>
         <svg
