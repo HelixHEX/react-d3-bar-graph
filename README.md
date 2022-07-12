@@ -59,4 +59,3 @@ import { BarGraph } from "react-d3-bar-graph";
 | title        | String  | false    | ""      | Title of the graph                                                          |
 | titleStyles  | Object  | false    | -       | How to style the title                                                      |
 | colors       | Array   | false    | ["black", "red"] | How to style individual bars                                       |
-|              |         |          |         |                                                                             |
