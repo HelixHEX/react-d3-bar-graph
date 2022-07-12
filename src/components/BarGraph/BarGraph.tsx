@@ -94,7 +94,6 @@ export const BarGraph = ({
         );
       })
       .remove();
-    console.log(maxHeight);
 
     const yScale = scaleLinear()
       .domain([0, yRange]) // todo
