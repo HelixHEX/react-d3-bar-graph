@@ -13,7 +13,8 @@ declare type Props = {
     title?: string;
     xAxisSlanted?: boolean;
     titleStyles?: any;
-    colors?: any;
+    colors?: Array<any>;
+    marginBottom?: number;
 };
-export declare const BarGraph: ({ data, xValue, yValue, yRange, ticks, width, height, styles, xAxisStyles, yAxisStyles, axisStyles, title, xAxisSlanted, titleStyles, colors, }: Props) => JSX.Element;
+export declare const BarGraph: ({ data, xValue, yValue, yRange, ticks, width, height, styles, xAxisStyles, yAxisStyles, axisStyles, title, xAxisSlanted, titleStyles, colors, marginBottom }: Props) => JSX.Element;
 export {};

@@ -17,7 +17,8 @@ type Props = {
   title?: string;
   xAxisSlanted?: boolean;
   titleStyles?: any;
-  colors?: any;
+  colors?: Array<any>;
+  marginBottom?: number;
 };
 
 type ObserverProps = {
@@ -65,12 +66,13 @@ export const BarGraph = ({
   xAxisSlanted = false,
   titleStyles,
   colors = ["black"],
+  marginBottom = 30
 }: Props) => {
   const svgRef = useRef() as React.MutableRefObject<SVGSVGElement>;
   const wrapperRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const dimensions = useResizeObserver({ ref: wrapperRef });
   useEffect(() => {
-    const margin = { top: 30, right: 30, bottom: 5, left: 50 };
+    const margin = { top: 30, right: 30, bottom: marginBottom, left: 50 };
     const svg = select(svgRef.current).style("overflow", "visble");
 
     if (!dimensions) return;
@@ -92,7 +94,7 @@ export const BarGraph = ({
       .each(function (d) {
         maxHeight = Math.max(
           maxHeight,
-          this.getBBox().height + xAxis.tickSize() + xAxis.tickPadding() + margin.bottom
+          this.getBBox().width + xAxis.tickSize() + xAxis.tickPadding() + margin.bottom
         );
       })
       .remove();
@@ -140,7 +142,7 @@ export const BarGraph = ({
       .attr("width", xScale.bandwidth)
       .attr(
         "height",
-        (value) => dimensions.height - maxHeight - yScale(value[yValue])
+        (value) => dimensions.height - maxHeight - yScale(value[yValue]) - 1
       )
       .attr("fill", (_, i) => colors[i]);
   }, [
